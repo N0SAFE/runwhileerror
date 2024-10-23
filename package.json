@@ -1,0 +1,42 @@
+{
+  "name": "@n0safe/runwhileerror",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "bin": {
+    "runwhileerror": "dist/index.js"
+  },
+  "scripts": {
+    "tsup": "tsup --onSuccess \"npm run lint\"",
+    "tsup:watch": "tsup --watch --onSuccess \"npm run lint\"",
+    "clean": "rimraf dist",
+    "init": "npm run build:no:check",
+    "dev": "npm run clean && concurrently -c \"blue,green\" -n \"files,types\" \"npm run tsup:watch\" \"tsc --build --force --pretty --preserveWatchOutput --verbose --diagnostics --watch\"",
+    "build": "npm run clean && concurrently -c \"blue,green\" -n \"files,types\" \"npm run tsup\" \"tsc --build --force --pretty --preserveWatchOutput --verbose --diagnostics\"",
+    "build:no:check": "npm run clean && concurrently -c \"blue,green\" -n \"files,types\" \"npm run tsup\" \"tsc --build --noCheck --force --pretty --preserveWatchOutput --verbose --diagnostics\"",
+    "lint": "eslint \"**/*.ts*\"",
+    "runwhileerror": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@types/node": "^22.7.6",
+    "concurrently": "^9.0.1",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.0",
+    "typescript-eslint": "^8.11.0"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ]
+}
